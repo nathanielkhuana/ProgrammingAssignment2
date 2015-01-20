@@ -6,7 +6,7 @@
 #Computing the inverse of a square matrix can be done with the solve function in R. For example, if X is a square invertible matrix, then solve(X) returns its inverse.
 
 
-makeCacheMatrix <- function(x=matrix()) {
+makeCacheMatrix <- function(x = matrix()) {
 	#Initial m
     m <- NULL
 	#Get matrix
@@ -15,11 +15,11 @@ makeCacheMatrix <- function(x=matrix()) {
     setinv <- function(matrix) m <<- matrix
 	#Get inverse matrix
     getinv <- function() m
-    #Return list
+	#Return list
     list(get=get, setinv=setinv, getinv=getinv)
 }
 
-cacheSolve <- function(x) {
+cacheSolve <- function(x, ...) {
     m <- x$getinv()
 	#If inverse not empty, return m
     if(!is.null(m)){
@@ -27,8 +27,8 @@ cacheSolve <- function(x) {
         return(m)
     }
 	#If empty then set inverse
-    data <- x$get()
-	m <- solve(data)
+	data <- x$get()
+	m <- solve(data, ...)
 	x$setinv(m)
 	return(m)
 }
